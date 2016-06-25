@@ -4,10 +4,14 @@ rvm:
  - 2.2.4
 
 script:
+ - bundle install
  - bundle exec rake db:migrate --trace
  - RAILS_ENV=test bundle exec rake db:migrate --trace
  - bundle exec rake db:test:prepare
  - bundle exec rspec -fd spec/
+
+gemfile:
+- "/Gemfile"
 
 after_success:
  - CI=true TRAVIS=true coveralls --verbose
